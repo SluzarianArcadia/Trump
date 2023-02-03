@@ -1,23 +1,14 @@
 const NUMBER_OF_TWEETS = 10360; 
-var insult = [];
+var JSONTweets = [];
 
+$.getJSON("TrumpInsults.json", function(json){
+    JSONTweets = json;
+});
 
-test = $.getJSON('TrumpInsults.json')
-
-console.log(test)
-
-function myFunction() {
-    console.log("hi222")
- }
-
-    $("#randomBtn").click(function (e) { 
-        let x = Math.floor((Math.random() * NUMBER_OF_TWEETS) + 1);
-    
-        $.getJSON('TrumpInsults.json', function(data) {
-                insult = data.insults[x];                      
-                $('#Date').html(insult.date);
-                $('#Target').html(insult.target);
-                $('#Insult').html(insult.insult);
-                $('#Tweet').html(insult.tweet);
-            });  
-    });
+$("#randomBtn").click(function (e) { 
+    tweetPicked = JSONTweets.insults[Math.floor((Math.random() * NUMBER_OF_TWEETS) + 1)]
+    $('#Date')  .text(tweetPicked.date)  .hide().fadeToggle(300);
+    $('#Target').text(tweetPicked.target).hide().fadeToggle(400);
+    $('#Insult').text(tweetPicked.insult).hide().fadeToggle(600);
+    $('#Tweet') .text(tweetPicked.tweet) .hide().fadeToggle(800);
+});
