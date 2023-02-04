@@ -11,14 +11,11 @@ $.getJSON("uniqueTargets.json", function(json){
     renderSelectDropDown(JSONTargets)
 });
 
-$("#randomBtn").click(function () { 
+
+function getRandom(){
     tweetPicked = JSONTweets.insults[Math.floor((Math.random() * NUMBER_OF_TWEETS) + 1)]
-    console.log(tweetPicked)
-    $('#Date')  .text(tweetPicked.date)  .hide().fadeToggle(300);
-    $('#Target').text(tweetPicked.target).hide().fadeToggle(400);
-    $('#Insult').text(tweetPicked.insult).hide().fadeToggle(600);
-    $('#Tweet') .text(tweetPicked.tweet) .hide().fadeToggle(800);
-});
+    renderHTMLTweetArray([tweetPicked], "#random")
+}
 
 function renderSelectDropDown(JSONTargets){
     JSONTargets.forEach((element) => {
@@ -64,7 +61,7 @@ function findMatchingTextinTweet() {
     }
     matchedObjects = matchedObjects.filter(function(e){return e});
     
-    if(matchedObjects.length === 0){
+    if((matchedObjects.length === 0) && (searchStr.length > 2)){
         return [{"date": "N/A","target": "N/A","insult": "N/A","tweet": "No tweet was found with this text, try again!"}]
     } else {
         return matchedObjects;

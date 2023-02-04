@@ -12,20 +12,9 @@
 <body>
   <main class="container">
     <h1>TRUMP INSULTS (2014-2021)</h1>
-    <button id="randomBtn">Get Random Trump Insult</button>
-    <h3>Insult:</h3><span><p id="randomInsult"></p></span>
+    <button id="randomBtn" onclick="getRandom()">Get Random Trump Insult</button>
     
-    <div class="grid">
-      <label>Date:</label>
-      <span><p id="Date"></p></span>
-      <label>Target:</label>
-      <span><p id="Target"></p></span>
-      <label>Insult:</label>
-      <span><p id="Insult"></p></span>
-    </div>
-    <div class="grid">
-      <span><label>Tweet:</label><p id="Tweet"></p></span>
-    </div>
+    <div id="random"></div>
 
     <br>
 
@@ -35,6 +24,7 @@
     <select id="listOfTargets" required onchange="selectTargetTweets()">
       <option value="" selected  >Select the Target</option>
     </select>
+
     <div id="targetGroup"></div>
 
     <br>
@@ -47,7 +37,7 @@
 
     <footer><i>Made by Eric Slusarz</i></footer>
   </main>
-        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-        <script src="index.js"></script>    
+      <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+      <script src="index.js"></script>    
 </body>
 </html> 
