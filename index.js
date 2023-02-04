@@ -1,4 +1,4 @@
-const NUMBER_OF_TWEETS = 10360; 
+const NUMBER_OF_TWEETS = 10359; 
 var JSONTweets = [];
 var JSONTargets = [];
 
@@ -19,7 +19,7 @@ function getRandom(){
 function renderSelectDropDown(JSONTargets){
     JSONTargets.forEach((element) => {
         var container = $('<option />');
-        container.html(element).appendTo()
+        container.html(element).addClass("cap")
         $(container).appendTo("#listOfTargets");
     });
 }
@@ -46,10 +46,8 @@ function getObjects(obj, key, val) {
 }
 
 function findMatchingTextinTweet() {
-
     searchStr = $("#search").val();
     var matchedObjects = [];
-
     if (searchStr.length > 2){
         JSONTweets.insults.forEach((element, i) => { 
             var match = element.tweet.includes(searchStr)
@@ -59,7 +57,6 @@ function findMatchingTextinTweet() {
         })
     }
     matchedObjects = matchedObjects.filter(function(e){return e});
-    
     if((matchedObjects.length === 0) && (searchStr.length > 2)){
         return [{"date": "N/A","target": "N/A","insult": "N/A","tweet": "No tweet was found with this text, try again!"}]
     } else {
@@ -67,28 +64,20 @@ function findMatchingTextinTweet() {
     }
 }
 
-
 function searchTweets(){
-
     matchingTweets = findMatchingTextinTweet();
     $("#numberOfInsultsSearch").html(matchingTweets.length);
     renderHTMLTweetArray(matchingTweets, "#searchGroup");
-
 }
 
 function renderHTMLTweetArray(arrayToRender,htmlID){
     $(htmlID).empty();
-
     arrayToRender.forEach((element, i) => {
         container  = $("<div>").addClass("grid");
         container2 = $("<div>").addClass("grid");
-        var txt = $("</p>").text("Date: "    +element.date);
-        var txt0 = $("</p>").text("Target: "    +element.target).addClass("cap");
-        var txt1 = $("</p>").text("Insult: " +element.insult).addClass("cap");
-        var txt2 = $("</p>").text("Tweet: "  +element.tweet).addClass("smallerText");
-        $(txt).appendTo(container).hide().fadeToggle  (400 +(1 * i));
-        $(txt0).appendTo(container).hide().fadeToggle  (400 +(1 * i));
-        $(txt1).appendTo(container).hide().fadeToggle (600 +(1 * i));
+        var txt  = $("<p>Date: " +element.date+ "</p><p class='cap'>Target: "+element.target+"</p> <p class='cap'>Insult: "+element.insult+"</p>");
+        var txt2 = $("</p>").text("Tweet: " +element.tweet).addClass("smallerText");
+        $(txt) .appendTo(container).hide().fadeToggle  (400 +(1 * i));
         $(txt2).appendTo(container2).hide().fadeToggle(900 +(1 * i));
         $(htmlID).append(container).append(container2).append("<hr>");
     })
