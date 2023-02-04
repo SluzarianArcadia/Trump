@@ -62,8 +62,13 @@ function findMatchingTextinTweet() {
                 }
         })
     }
-    matchedObjects = matchedObjects.filter(function(e){return e}); 
-    return matchedObjects;
+    matchedObjects = matchedObjects.filter(function(e){return e});
+    
+    if(matchedObjects.length === 0){
+        return [{"date": "N/A","target": "N/A","insult": "N/A","tweet": "No tweet was found with this text, try again!"}]
+    } else {
+        return matchedObjects;
+    }
 }
 
 
