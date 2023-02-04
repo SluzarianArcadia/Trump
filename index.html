@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
     <link rel="stylesheet" href="style.css">
+
   </head>
 <body>
   <main class="container">
@@ -31,10 +32,11 @@
     <br>
 
     <h2>Search specific words in Trump's tweets: </h2>
-    <input onkeyup=searchTweets() type="search" id="search" name="search" placeholder="Search">
+    <input onkeydown=addLoader() onkeyup=searchTweets(removeLoader) type="search" id="search" name="search" placeholder="Search">
 
     <h3># of insults found from search: <b id="numberOfInsultsSearch"></b></h3>
     <div id="searchGroup"></div>
+    <div id="loader"></div>
 
     <br>
 

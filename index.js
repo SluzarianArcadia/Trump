@@ -2,6 +2,7 @@ const NUMBER_OF_TWEETS = 10359;
 var JSONTweets = [];
 var JSONTargets = [];
 
+
 $.getJSON("TrumpInsults.json", function(json){
     JSONTweets = json;
 });
@@ -12,6 +13,7 @@ $.getJSON("uniqueTargets.json", function(json){
 });
 
 function getRandom(){
+
     tweetPicked = JSONTweets.insults[Math.floor((Math.random() * NUMBER_OF_TWEETS) + 1)]
     renderHTMLTweetArray([tweetPicked], "#random")
 }
@@ -46,6 +48,7 @@ function getObjects(obj, key, val) {
 }
 
 function findMatchingTextinTweet() {
+
     searchStr = $("#search").val();
     var matchedObjects = [];
     if (searchStr.length > 2){
@@ -62,16 +65,23 @@ function findMatchingTextinTweet() {
     } else {
         return matchedObjects;
     }
+
 }
 
-function searchTweets(){
+
+ function searchTweets(callback){
+
     matchingTweets = findMatchingTextinTweet();
     $("#numberOfInsultsSearch").html(matchingTweets.length);
-    renderHTMLTweetArray(matchingTweets, "#searchGroup");
+    renderHTMLTweetArray(matchingTweets, "#searchGroup")
+
+    callback();
 }
 
 function renderHTMLTweetArray(arrayToRender,htmlID){
+
     $(htmlID).empty();
+
     arrayToRender.forEach((element, i) => {
         container  = $("<div>").addClass("grid");
         container2 = $("<div>").addClass("grid");
@@ -82,3 +92,11 @@ function renderHTMLTweetArray(arrayToRender,htmlID){
         $(htmlID).append(container).append(container2).append("<hr>");
     })
 };
+
+  function addLoader(){
+     $('#loader').addClass("loader");
+} 
+
+function removeLoader(){
+    $('#loader').removeClass("loader");
+} 
