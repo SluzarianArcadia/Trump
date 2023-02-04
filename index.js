@@ -8,7 +8,6 @@ $.getJSON("TrumpInsults.json", function(json){
 
 $.getJSON("uniqueTargets.json", function(json){
     JSONTargets = json.targetsName;
-    console.log(JSONTargets)
     renderSelectDropDown(JSONTargets)
 });
 
@@ -19,7 +18,6 @@ $("#randomBtn").click(function (e) {
     $('#Insult').text(tweetPicked.insult).hide().fadeToggle(600);
     $('#Tweet') .text(tweetPicked.tweet) .hide().fadeToggle(800);
 });
-
 
 function renderSelectDropDown(JSONTargets){
     JSONTargets.forEach((element, i) => {
@@ -34,23 +32,8 @@ function selectTargetTweets (){
     selectedTarget = $("#listOfTargets :selected").text()
     arrayOfTweetsTarget = getObjects(JSONTweets, 'target', selectedTarget);
     $("#numberOfInsults").html(arrayOfTweetsTarget.length);
-
-    arrayOfTweetsTarget.forEach(element => {
-        container  = $("<div>").addClass("grid");
-        container2 = $("<div>").addClass("grid");
-        var txt = $("</p>").text("Date: "    +element.date);
-        var txt1 = $("</p>").text("Insult: " +element.insult);
-        var txt2 = $("</p>").text("Tweet: "  +element.tweet).addClass("smallerText");
-
-        $(txt).appendTo(container);
-        $(txt1).appendTo(container);
-        $(txt2).appendTo(container2);
-
-        $("#targetGroup").append(container).append(container2).append("<hr>");
-    });
-
+    renderHTMLTweetArray(arrayOfTweetsTarget, "#targetGroup");
 }
-
 
 function getObjects(obj, key, val) {
     var objects = [];
@@ -64,3 +47,46 @@ function getObjects(obj, key, val) {
     }
     return objects;
 }
+
+function findMatchingTextinTweet() {
+
+    searchStr = $("#search").val();
+    var matchedObjects = [];
+
+    if (searchStr.length > 2){
+        JSONTweets.insults.forEach((element, i) => { 
+            var match = element.tweet.includes(searchStr)
+                if (match){
+                    matchedObjects[i] = element
+                }
+        })
+    }
+    matchedObjects = matchedObjects.filter(function(e){return e}); 
+    return matchedObjects;
+}
+
+
+function searchTweets(){
+    matchingTweets = findMatchingTextinTweet();
+    $("#numberOfInsultsSearch").html(matchingTweets.length);
+    renderHTMLTweetArray(matchingTweets, "#searchGroup")
+}
+
+
+
+function renderHTMLTweetArray(arrayToRender,htmlID){
+    $(htmlID).empty();
+
+    arrayToRender.forEach((element, i) => {
+        container  = $("<div>").addClass("grid");
+        container2 = $("<div>").addClass("grid");
+        var txt = $("</p>").text("Date: "    +element.date);
+        var txt1 = $("</p>").text("Insult: " +element.insult);
+        var txt2 = $("</p>").text("Tweet: "  +element.tweet).addClass("smallerText");
+        $(txt).appendTo(container).hide().fadeToggle  (400 +(1 * i));
+        $(txt1).appendTo(container).hide().fadeToggle (600 +(1 * i));
+        $(txt2).appendTo(container2).hide().fadeToggle(900 +(1 * i));
+        $(htmlID).append(container).append(container2).append("<hr>");
+    })
+    
+};

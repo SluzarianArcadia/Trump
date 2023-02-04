@@ -1,68 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Random Trump Insult Tweets</title>
-        <meta name="description" content="Want to get insulted by our president well this site is just for you!">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
-        <link rel="stylesheet" href="style.css">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Random Trump Insult Tweets</title>
+    <meta name="description" content="Want to get insulted by our president well this site is just for you!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+  <main class="container-fluid">
+    <h1>TRUMP INSULTS (2014-2021)</h1>
+    <button id="randomBtn">Get Random Trump Insult</button>
+    <h3>Insult:</h3><span><p id="randomInsult"></p></span>
+    
+    <div class="grid">
+      <label>Date:</label>
+      <span><p id="Date"></p></span>
+      <label>Target:</label>
+      <span><p id="Target"></p></span>
+      <label>Insult:</label>
+      <span><p id="Insult"></p></span>
+    </div>
+    <div class="grid">
+      <span><label>Tweet:</label><p id="Tweet"></p></span>
+    </div>
+    
+    <br>
 
-    </head>
-    <body>
+    <h2>See all insults based on who Trump was Targeting</h2>
+    <h3># of insults at this target: <b id="numberOfInsults"></b></h3>
+    <label for="Target of Trump's Tweet Insult">Trump's Target</label>
+    <select id="listOfTargets" required onchange="selectTargetTweets()">
+      <option value="" selected  >Select the Target</option>
+    </select>
+    <div id="targetGroup"></div>
 
-        <main class="container-fluid">
-            <h1>TRUMP INSULTS (2014-2021)</h1>
+    <br>
 
-            <button id="randomBtn">Get Random Trump Insult</button>
-            <h3>Insult:</h3><span><p id="randomInsult"></p></span>
-            
+    <h2>Search specific words in Trump's tweets: </h2>
+    <input onkeyup=searchTweets() type="search" id="search" name="search" placeholder="Search">
 
-            <div class="grid">
-                <label>Date:</label>
-                <span><p id="Date"></p></span>
-                <label>Target:</label>
-                <span><p id="Target"></p></span>
-                <label>Insult:</label>
-                <span><p id="Insult"></p></span>
-              </div>
-              <div class="grid">
-                <span><label>Tweet:</label><p id="Tweet"></p></span>
-              </div>
+    <h3># of insults at this target from search: <b id="numberOfInsultsSearch"></b></h3>
+    <div id="searchGroup"></div>
 
-
-
-              <br>
-
-              <h2>See all insults based on who Trump was Targeting</h2>
-              <h3># of insults <b id="numberOfInsults"></b></h3>
-
-              <label for="Target of Trump's Tweet Insult">Trump's Target</label>
-              <select id="listOfTargets" required onchange="selectTargetTweets()">
-                <option value="" selected  >Select the Target</option>
-              </select>
-
-              <div id="targetGroup"></div>
-
-
-
-
-
-
-        </main>
-
-
-
-
-
-
-
+  </main>
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
         <script src="index.js"></script>    
-
-
-    </body>
-
-
-</html>
+</body>
+</html> 
