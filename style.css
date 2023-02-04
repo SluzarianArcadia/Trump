@@ -1,3 +1,8 @@
 .smallerText {
     font-size: 16px;
 }
+
+#targetGroup, #searchGroup {
+    max-height: 700px;
+    overflow-y: scroll;
+}
