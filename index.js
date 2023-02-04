@@ -11,8 +11,9 @@ $.getJSON("uniqueTargets.json", function(json){
     renderSelectDropDown(JSONTargets)
 });
 
-$("#randomBtn").click(function (e) { 
+$("#randomBtn").click(function () { 
     tweetPicked = JSONTweets.insults[Math.floor((Math.random() * NUMBER_OF_TWEETS) + 1)]
+    console.log(tweetPicked)
     $('#Date')  .text(tweetPicked.date)  .hide().fadeToggle(300);
     $('#Target').text(tweetPicked.target).hide().fadeToggle(400);
     $('#Insult').text(tweetPicked.insult).hide().fadeToggle(600);
@@ -20,7 +21,7 @@ $("#randomBtn").click(function (e) {
 });
 
 function renderSelectDropDown(JSONTargets){
-    JSONTargets.forEach((element, i) => {
+    JSONTargets.forEach((element) => {
         var container = $('<option />');
         container.html(element).appendTo()
         $(container).appendTo("#listOfTargets");
@@ -67,12 +68,12 @@ function findMatchingTextinTweet() {
 
 
 function searchTweets(){
+
     matchingTweets = findMatchingTextinTweet();
     $("#numberOfInsultsSearch").html(matchingTweets.length);
-    renderHTMLTweetArray(matchingTweets, "#searchGroup")
+    renderHTMLTweetArray(matchingTweets, "#searchGroup");
+
 }
-
-
 
 function renderHTMLTweetArray(arrayToRender,htmlID){
     $(htmlID).empty();
@@ -81,9 +82,11 @@ function renderHTMLTweetArray(arrayToRender,htmlID){
         container  = $("<div>").addClass("grid");
         container2 = $("<div>").addClass("grid");
         var txt = $("</p>").text("Date: "    +element.date);
+        var txt0 = $("</p>").text("Target: "    +element.target);
         var txt1 = $("</p>").text("Insult: " +element.insult);
         var txt2 = $("</p>").text("Tweet: "  +element.tweet).addClass("smallerText");
         $(txt).appendTo(container).hide().fadeToggle  (400 +(1 * i));
+        $(txt0).appendTo(container).hide().fadeToggle  (400 +(1 * i));
         $(txt1).appendTo(container).hide().fadeToggle (600 +(1 * i));
         $(txt2).appendTo(container2).hide().fadeToggle(900 +(1 * i));
         $(htmlID).append(container).append(container2).append("<hr>");
